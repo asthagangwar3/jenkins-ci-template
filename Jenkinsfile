@@ -1,6 +1,6 @@
 pipeline {
 	
-	agent {label 'linux_node'}
+	agent {label 'Windows-Agent-Astha'}
 
     stages {
         

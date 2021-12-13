@@ -8,6 +8,11 @@ pipeline {
           steps {
                   cleanWs()
                 }
+	stage ('Git Checkout') {
+           steps {
+                  git branch: 'master', credentialsId: '<id-of-Jenkins-credentials>', url: '<url to your GitHub repository'
+                 }
+  }	
       
         stage('Build') {	
              

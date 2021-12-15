@@ -18,13 +18,13 @@ pipeline {
       
         stage('Restore-Packages') {	
 		steps{
-            bat 'C://Users//Administrator//Downloads//softwares//nuget.exe restore C://Users//Administrator//Desktop//jenkins-ci-template//src//MyWindowsService\MyWindowsService.sln'
+            bat 'C://Users//Administrator//Downloads//softwares//nuget.exe restore C://Users//Administrator//Desktop//jenkins-ci-template//src//MyWindowsService//MyWindowsService.sln'
 		     }
 			 }
 			 
 		stage('Build') {
 		steps{
-			bat 'msbuild C:\Users\Administrator\Desktop\jenkins-ci-template\src\MyWindowsService\MyWindowsService\Deploy-Windows-Service-Via-MSBuild.proj'
+			bat 'msbuild C://Users//Administrator//Desktop//jenkins-ci-template//src//MyWindowsService//MyWindowsService//Deploy-Windows-Service-Via-MSBuild.proj'
 		 }
 		}
 		

@@ -30,14 +30,14 @@ pipeline {
 		
 		stage('Pre-Processing') {
 		steps{
-		    bat 'C:\Users\Administrator\Downloads\softwares\sonar-scanner\SonarQube.Scanner.MSBuild.exe begin /k:"Jenkins_CI_Dotnet" /d:sonar.host.url="http://3.234.193.237:9000/" /d:sonar.login="6c6431244ceb22769eb35e51c9b42e23c048c3f1"'
+		    bat 'C://Users//Administrator//Downloads//softwares//sonar-scanner//SonarQube.Scanner.MSBuild.exe begin /k:"Jenkins_CI_Dotnet" /d:sonar.host.url="http://3.234.193.237:9000/" /d:sonar.login="6c6431244ceb22769eb35e51c9b42e23c048c3f1"'
 			}
 		
 		}
 		
 		stage('Rebuild'){
 		steps{
-		    bat '"C:\Program Files (x86)\MSBuild\14.0\Bin\amd64\MSBuild.exe" "C://Users//Administrator//Desktop//jenkins-ci-template//src//MyWindowsService//MyWindowsService.sln" /t:Rebuild'
+		    bat '"C://Program Files (x86)//SBuild//14.0//Bin//amd64//MSBuild.exe" "C://Users//Administrator//Desktop//jenkins-ci-template//src//MyWindowsService//MyWindowsService.sln" /t:Rebuild'
 			}
 			}
 			

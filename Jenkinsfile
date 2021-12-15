@@ -11,7 +11,7 @@ pipeline {
 				}
 	    stage ('Git Checkout') {
            steps {
-                  git branch: 'master', credentialsId: '<id-of-Jenkins-credentials>', url: '<url to your GitHub repository'
+                  git branch: 'master',url: 'https://github.com/asthagangwar3/jenkins-ci-template.git'
                  }
   }	
   

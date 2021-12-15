@@ -37,7 +37,7 @@ pipeline {
 		
 		stage('Rebuild'){
 		steps{
-		    bat '"C://Program Files (x86)//SBuild//14.0//Bin//amd64//MSBuild.exe" "C://Users//Administrator//Desktop//jenkins-ci-template//src//MyWindowsService//MyWindowsService.sln" /t:Rebuild'
+		    bat '"C://Program Files (x86)//MSBuild//14.0//Bin//amd64//MSBuild.exe" "C://Users//Administrator//Desktop//jenkins-ci-template//src//MyWindowsService//MyWindowsService.sln" /t:Rebuild'
 			}
 			}
 			

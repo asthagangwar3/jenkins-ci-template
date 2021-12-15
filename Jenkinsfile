@@ -8,51 +8,49 @@ pipeline {
           steps {
                   cleanWs()
                 }
-	stage ('Git Checkout') {
+				}
+	    stage ('Git Checkout') {
            steps {
                   git branch: 'master', credentialsId: '<id-of-Jenkins-credentials>', url: '<url to your GitHub repository'
                  }
   }	
+  
       
-        stage('Build') {	
-             
+        stage('Restore-Packages') {	
+		steps{
+            bat 'C:\Users\Administrator\Downloads\softwares\nuget.exe restore C:\Users\Administrator\Desktop\jenkins-ci-template\src\MyWindowsService\MyWindowsService.sln'
 		     }
+			 }
+			 
+		stage('Build') {
+		steps{
+			bat 'msbuild C:\Users\Administrator\Desktop\jenkins-ci-template\src\MyWindowsService\MyWindowsService\Deploy-Windows-Service-Via-MSBuild.proj'
+		 }
+		}
+		
+		stage('Pre-Processing') {
+		steps{
+		    bat 'C:\Users\Administrator\Downloads\softwares\sonar-scanner\SonarQube.Scanner.MSBuild.exe begin /k:"Jenkins_CI_Dotnet" /d:sonar.host.url="http://3.234.193.237:9000/" /d:sonar.login="6c6431244ceb22769eb35e51c9b42e23c048c3f1"'
+			}
+		
+		}
+		
+		stage('Rebuild'){
+		steps{
+		    bat '"C:\Program Files (x86)\MSBuild\14.0\Bin\amd64\MSBuild.exe" "C://Users//Administrator//Desktop//jenkins-ci-template//src//MyWindowsService//MyWindowsService.sln" /t:Rebuild'
+			}
+			}
+			
+		stage('Post-processing') {
+		steps{
+             bat 'C:\Users\Administrator\Downloads\softwares\sonar-scanner\SonarQube.Scanner.MSBuild.exe end /d:sonar.login="6c6431244ceb22769eb35e51c9b42e23c048c3f1" '
+           }
+		   }
+           		
       
        
 	} 
-      stage('Sonar Analysis'){
-        steps{
-           
-            withSonarQubeEnv('Sonar')
-              {
-                bat 'sonar-scanner'
-              }
-            }
-             
-        
-            
-         post {
-                // If Maven was able to run the tests, even if some of the test
-                // failed, record the test results and archive the jar file.
-                success {
-                    junit '**/target/surefire-reports/TEST-*.xml'
-                    archiveArtifacts 'target/*.jar'
-                }
-           
-                always {
-               emailext body: 'A Test EMail',  to: '$DEFAULT_RECIPIENTS', subject: 'Test'
-                }
-            }
-			}
-       //stage('quality gate'){
-	 //      steps{
-           //     timeout(time: 1, unit: 'HOURS') {
-             //   waitForQualityGate abortPipeline: true 
-               // }
-	      // }
-             //}         
-          
-        } 
       
       
-    }
+      }
+    

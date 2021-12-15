@@ -18,7 +18,7 @@ pipeline {
       
         stage('Restore-Packages') {	
 		steps{
-            bat 'C:\Users\Administrator\Downloads\softwares\nuget.exe restore C:\Users\Administrator\Desktop\jenkins-ci-template\src\MyWindowsService\MyWindowsService.sln'
+            bat 'C://Users//Administrator//Downloads//softwares//nuget.exe restore C://Users//Administrator//Desktop//jenkins-ci-template//src//MyWindowsService\MyWindowsService.sln'
 		     }
 			 }
 			 

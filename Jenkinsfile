@@ -1,9 +1,14 @@
 pipeline {
 	
 	agent {label 'Windows-Agent-Astha'}
+	
+	environment { 
+        SONAR_CREDS = credentials('Sonar_Token')		
+        Branch = 'develop'
+    }
 
     stages {
-        
+	  
         stage ('Clean workspace') {
           steps {
                   cleanWs()
@@ -30,8 +35,11 @@ pipeline {
 		
 		stage('Pre-Processing') {
 		steps{
-		    bat 'C://Users//Administrator//Downloads//softwares//sonar-scanner//SonarQube.Scanner.MSBuild.exe begin /k:Jenkins_CI_Dotnet /d:sonar.host.url=http://3.234.193.237:9000/ /d:sonar.login=6c6431244ceb22769eb35e51c9b42e23c048c3f1'
+			  withSonarQubeEnv('Sonar')
+			{
+		    bat 'C://Users//Administrator//Downloads//softwares//sonar-scanner//SonarQube.Scanner.MSBuild.exe begin /k:Jenkins_CI_Dotnet'
 			}
+		}
 		
 		}
 		
@@ -43,9 +51,19 @@ pipeline {
 			
 		stage('Post-processing') {
 		steps{
-             bat 'C://Users//Administrator//Downloads//softwares//sonar-scanner//SonarQube.Scanner.MSBuild.exe end /d:sonar.login="6c6431244ceb22769eb35e51c9b42e23c048c3f1" '
-           }
+			 withSonarQubeEnv('Sonar')
+			{
+             bat 'C://Users//Administrator//Downloads//softwares//sonar-scanner//SonarQube.Scanner.MSBuild.exe end'
+           } 
+		}
 		   }
+	    
+	    stage('quality gate'){
+	      steps{       
+              waitForQualityGate abortPipeline: true 
+                }
+	      
+             }   
            		
       
        
@@ -53,4 +71,3 @@ pipeline {
       
       
       }
-    

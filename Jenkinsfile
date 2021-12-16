@@ -12,7 +12,7 @@ pipeline {
 	    {
 		    steps
 		    {
-			    echo '$Branch'
+			    echo "$Branch"
 		    }
 	    }
         

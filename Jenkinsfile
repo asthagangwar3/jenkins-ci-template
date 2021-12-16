@@ -57,7 +57,7 @@ pipeline {
 			
 		stage('Post-processing') {
 		steps{
-             bat 'C://Users//Administrator//Downloads//softwares//sonar-scanner//SonarQube.Scanner.MSBuild.exe end /d:sonar.login="{$SONAR_CREDS}"'
+             bat 'C://Users//Administrator//Downloads//softwares//sonar-scanner//SonarQube.Scanner.MSBuild.exe end /d:sonar.login=$SONAR_CREDS '
            }
 		   }
            		

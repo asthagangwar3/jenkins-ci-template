@@ -1,8 +1,20 @@
 pipeline {
 	
 	agent {label 'Windows-Agent-Astha'}
+	
+	environment { 
+        Branch = 'develop'
+    }
 
     stages {
+	  
+	    stage('Branch')
+	    {
+		    steps
+		    {
+			    echo '$Branch'
+		    }
+	    }
         
         stage ('Clean workspace') {
           steps {

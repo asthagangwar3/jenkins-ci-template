@@ -14,6 +14,7 @@ pipeline {
 		    steps
 		    {
 			    echo "$Branch"
+			    echo "$SONAR_CREDS"
 		    }
 	    }
         

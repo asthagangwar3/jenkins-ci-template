@@ -44,7 +44,7 @@ pipeline {
 		
 		stage('Pre-Processing') {
 		steps{
-			  withSonarQubeEnv('Sonar_Token')
+			  withSonarQubeEnv('Sonar')
 			{
 		    bat 'C://Users//Administrator//Downloads//softwares//sonar-scanner//SonarQube.Scanner.MSBuild.exe begin /k:Jenkins_CI_Dotnet /d:sonar.host.url=http://3.234.193.237:9000/ /d:sonar.login=6c6431244ceb22769eb35e51c9b42e23c048c3f1'
 			}

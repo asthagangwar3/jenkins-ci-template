@@ -60,8 +60,11 @@ pipeline {
 			
 		stage('Post-processing') {
 		steps{
+			 withSonarQubeEnv('Sonar')
+			{
              bat 'C://Users//Administrator//Downloads//softwares//sonar-scanner//SonarQube.Scanner.MSBuild.exe end'
-           }
+           } 
+		}
 		   }
 	    
 	    stage('quality gate'){
